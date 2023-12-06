@@ -17,7 +17,7 @@ with open('explainer.p', 'rb') as f1:
     print("Shap modele explainer")
     explainer = pickle.load(f1)
 
-df = pd.read_csv('test_data.csv', index_col=0)
+df = pd.read_csv('test_data_prod.csv', index_col=0)
 df=df.reset_index()
 num_client = df.SK_ID_CURR.unique()
 
