@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, render_template
 import pandas as pd
 import numpy as np
 import pickle
+import os
 
 # Suppress warnings
 import warnings
@@ -73,5 +74,6 @@ def predict_get(sk_id):
 
 
 if __name__ == '__main__':
-	app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
 					 
