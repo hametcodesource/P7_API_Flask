@@ -5,3 +5,4 @@ platformdirs==3.11.0
 virtualenv==20.24.6
 pandas==2.1.2
 numpy==1.26.1
+Flask==3.0.0
