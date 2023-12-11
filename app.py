@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, request, render_template
 import pandas as pd
-import numpy as np
 import pickle
 import os
+import numpy as np
 
 # Suppress warnings
 import warnings
@@ -35,8 +35,10 @@ def predict():
     liste des clients dans le fichier
 
     """
-    return jsonify({"model": "Logistic_Regression",
-                    "list_client_id" :  list(num_client.astype(str))})
+    model="Logistic_Regression",
+    list_client_id=list(num_client.astype(str))
+    data={"model": model,"list_client_id" :  list_client_id}
+    return jsonify(data)
 
 
 
@@ -61,16 +63,16 @@ def predict_get(sk_id):
         col.remove("SK_ID_CURR")
         client_info=client_info[col]
         shap_values = explainer.shap_values(client_info)
-        print(shap_values)
         predict = grid_lgbm.predict(client_info)[0]
         predict_proba = grid_lgbm.predict_proba(client_info)[0]
         predict_proba_0 = str(predict_proba[0])
         predict_proba_1 = str(predict_proba[1])
+        return jsonify({ 'retour_prediction' : str(predict), 'predict_proba_0': predict_proba_0,
+                        'predict_proba_1': predict_proba_1,
+                        'shap_values': shap_values.tolist()})
     else:
-        predict = predict_proba_0 = predict_proba_1 = "client inconnu"
-    return jsonify({ 'retour_prediction' : str(predict), 'predict_proba_0': predict_proba_0,
-                     'predict_proba_1': predict_proba_1,
-                      'shap_values': shap_values.tolist()})
+        predict = predict_proba_0 = predict_proba_1 ="client inconnu"
+        return jsonify({ 'retour_prediction' : str(predict)})
 
 
 if __name__ == '__main__':
