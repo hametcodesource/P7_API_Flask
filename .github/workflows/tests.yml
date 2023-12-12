@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 name: Testing
 
 on:
@@ -29,4 +27,3 @@ jobs:
       run: |
         python -m unittest discover -v
 
->>>>>>> ebaad0d64b5b6344a51d9a175d547d2a41b891db
