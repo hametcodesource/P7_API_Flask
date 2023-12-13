@@ -36,7 +36,7 @@ class TestPredictGet(unittest.TestCase):
             response = predict_get(int(num_client_existants))
         
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200) 
 
 
         data = response.get_json()
